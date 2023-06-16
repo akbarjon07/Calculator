@@ -16,7 +16,7 @@
             <p class="calculator__logo">calc</p>
         </div>
 
-        <div class="calculator__input">0</div>
+        <input type="text" class="calculator__input" placeholder="0" id="input">
 
         <div class="calculator__btn-wrapper">
             <div class="calculator__btn-first-line calculator-lines">
@@ -49,7 +49,7 @@
 
             <div class="calculator__btn-fifth-line calculator-lines">
                 <button class="calculator__btn reser-btn">RESET</button>
-                <button class="calculator__btn equal-btn">=</button>
+                <button class="calculator__btn equal-btn" onclick={calculate(input.value)}>=</button>
             </div>
         </div>
     </div>
