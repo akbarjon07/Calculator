@@ -10,17 +10,17 @@ function calculate(value) {
     }
 }
 
+
 document.addEventListener("click", keyboardInputHandler);
 function keyboardInputHandler(e) {
   e.preventDefault();
-
 
   if (e.target.innerHTML === "0") {
     input.value += "0";
   } else if (e.target.innerHTML === "1") {
     input.value += "1";
   } else if (e.target.innerHTML === "2") {
-    input.value += "2";
+    input.value += "2";  
   } else if (e.target.innerHTML === "3") {
     input.value += "3";
   } else if (e.target.innerHTML === "4") {
@@ -31,23 +31,12 @@ function keyboardInputHandler(e) {
     input.value += "6";
   } else if (e.target.innerHTML === "7") {
     input.value += "7";
-  } else if (e.target.innerHTML === "7") {
-    input.value += "7";
   } else if (e.target.innerHTML === "8") {
     input.value += "8";
   } else if (e.target.innerHTML === "9") {
     input.value += "9";
   }
 
-  if (e.target.innerHTML === "+") {
-    input.value += "+";
-  } else if (e.target.innerHTML === "-") {
-    input.value += "-";
-  } else if (e.target.innerHTML === "*") {
-    input.value += "*";
-  } else if (e.target.innerHTML === "/") {
-    input.value += "/";
-  }
 
   if (e.target.innerHTML === ".") {
     input.value += ".";
@@ -66,3 +55,27 @@ function keyboardInputHandler(e) {
     input.value = "";
   }
 }
+
+const operator = document.querySelectorAll(".operator");
+
+for (let item of operator) {
+  item.addEventListener("click", e => {
+    if (e.target.innerHTML === "+" || e.target.textContent === "-" || e.target.textContent === "*" || e.target.textContent === "/") {
+      input.value += ""
+      input.value += e.target.innerHTML;
+      console.log(input.value);
+    }
+  })
+}
+
+// for (let i = 0; i < operator.length; i++) {
+//   operator[i].addEventListener("click", function(event) {
+//     if (event.target.textContent === "+" || event.target.textContent === "-" || event.target.textContent === "*" || event.target.textContent === "/") {
+//       let buttonText = event.target.textContent;
+//       input.value += buttonText;
+//     }
+//   });
+// }
+
+
+
