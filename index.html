@@ -16,40 +16,45 @@
             <p class="calculator__logo">calc</p>
         </div>
 
-        <input type="text" class="calculator__input" placeholder="0" id="input">
+        <!-- <input type="text" class="calculator__input" placeholder="0" id="input"> -->
+
+        <div class="calculator__content">
+            <div class="calculator__input"></div>
+            <div class="calculator__output"></div>
+        </div>
 
         <div class="calculator__btn-wrapper">
             <div class="calculator__btn-first-line calculator-lines">
-                <button class="calculator__btn number">7</button>
-                <button class="calculator__btn number">8</button>
-                <button class="calculator__btn number">9</button>
-                <button class="calculator__btn del-btn">DEL</button>
+                <button data-key="7" class="calculator__btn number">7</button>
+                <button data-key="8" class="calculator__btn number">8</button>
+                <button data-key="9" class="calculator__btn number">9</button>
+                <button data-key="backspace" class="calculator__btn del-btn">DEL</button>
             </div>
 
             <div class="calculator__btn-second-line calculator-lines">
-                <button class="calculator__btn number">4</button>
-                <button class="calculator__btn number">5</button>
-                <button class="calculator__btn number">6</button>
-                <button class="calculator__btn operator">+</button>
+                <button data-key="4" class="calculator__btn number">4</button>
+                <button data-key="5" class="calculator__btn number">5</button>
+                <button data-key="6" class="calculator__btn number">6</button>
+                <button data-key="+" class="calculator__btn operator">+</button>
             </div>
 
             <div class="calculator__btn-third-line calculator-lines">
-                <button class="calculator__btn number">1</button>
-                <button class="calculator__btn number">2</button>
-                <button class="calculator__btn number">3</button>
-                <button class="calculator__btn operator">-</button>
+                <button data-key="1" class="calculator__btn number">1</button>
+                <button data-key="2" class="calculator__btn number">2</button>
+                <button data-key="3" class="calculator__btn number">3</button>
+                <button data-key="-" class="calculator__btn operator">-</button>
             </div>
 
             <div class="calculator__btn-forth-line calculator-lines">
-                <button class="calculator__btn decimal">.</button>
-                <button class="calculator__btn number">0</button>
-                <button class="calculator__btn operator">/</button>
-                <button class="calculator__btn operator">*</button>
+                <button data-key="." class="calculator__btn decimal">.</button>
+                <button data-key="0" class="calculator__btn number">0</button>
+                <button data-key="/" class="calculator__btn operator">/</button>
+                <button data-key="*" class="calculator__btn operator">*</button>
             </div>
 
             <div class="calculator__btn-fifth-line calculator-lines">
-                <button class="calculator__btn reser-btn">RESET</button>
-                <button class="calculator__btn equal-btn">=</button>
+                <button data-key="clear" class="calculator__btn reser-btn">RESET</button>
+                <button data-key="=" class="calculator__btn equal-btn">=</button>
             </div>
         </div>
     </div>

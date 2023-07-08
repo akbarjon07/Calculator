@@ -24,15 +24,29 @@ body {
     color: #fff;
 }
 
-.calculator__input {
+.calculator__content {
     width: 500px;
+    height: 130px;
     padding: 20px;
     margin-bottom: 20px;
     border: 1px solid transparent;
     border-radius: 10px;
-    outline: none;
     background-color: hsl(224, 36%, 15%);
     font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.calculator__input {
+    font-weight: 700;
+    font-size: 26px;
+    color: #fff;
+}
+
+.calculator__output {
+    margin-top: 10px;
     font-weight: 700;
     font-size: 36px;
     color: #fff;
