@@ -1,89 +1,119 @@
-const display_input = document.querySelector(".calculator__input");
-const display_output = document.querySelector(".calculator__output");
-let buttons = document.querySelectorAll("button");
+let operator = '';
+let previousValue = '';
+let currentValue = '';
 
-let input = "";
+document.addEventListener("DOMContentLoaded", function(){
 
-for (let key of buttons) {
-	const value = key.dataset.key;
+    let clear = document.querySelector(".reser-btn");
+    let equal = document.querySelector(".equal-btn");
+    let decimal = document.querySelector(".decimal");
+    let delet = document.querySelector(".del-btn");
 
-	key.addEventListener('click', () => {
-		if (value == "clear") {
-			input = "";
-			display_input.innerHTML = "";
-			display_output.innerHTML = "";
-		} else if (value == "backspace") {
-			input = input.slice(0, -1);
-			display_input.innerHTML = CleanInput(input);
-		} else if (value == "=") {
-			let result = eval(input);
+    let numbers = document.querySelectorAll(".number");
+    let operators = document.querySelectorAll(".operator");
 
-			display_output.innerHTML = CleanOutput(result);
-		} else {
-			if (ValidateInput(value)) {
-				input += value;
-				display_input.innerHTML = CleanInput(input);
-			}
+    let previousScreen = document.querySelector(".calculator__input");
+    let currentScreen = document.querySelector(".calculator__output");
+
+    numbers.forEach((number) => number.addEventListener("click", function(e){
+        handleNumber(e.target.textContent)
+        currentScreen.textContent = currentValue;
+    }))
+
+    operators.forEach((op) => op.addEventListener("click", function(e){
+		if(currentValue != '') {
+			handleOperator(e.target.textContent)
+			previousScreen.textContent = previousValue + " " + operator;
+			currentScreen.textContent = currentValue;
 		}
-	})
+    }))
+
+    clear.addEventListener("click", function(){
+        previousValue = '';
+        currentValue = '';
+        operator = '';
+        previousScreen.textContent = currentValue;
+        currentScreen.textContent = currentValue;
+    })
+
+	delet.addEventListener("click", function(){
+        currentValue = currentValue.slice(0, -1);
+        currentScreen.textContent = currentValue;
+
+    })
+
+    equal.addEventListener("click", function(){
+        if(currentValue != '' && previousValue != ''){
+            calculate()
+            previousScreen.textContent = '';
+            if(previousValue.length <= 9){
+                currentScreen.textContent = previousValue;
+            } else{
+                currentScreen.textContent = previousValue.slice(0,9) + "...";
+            }
+        }
+    })
+
+    decimal.addEventListener("click", function(){
+		addDecimal();
+    })
+})
+
+function handleNumber(num){
+    if(currentValue.length <= 5){
+        currentValue += num;
+    }
 }
 
-function CleanInput(input) {
-	let input_array = input.split("");
-	let input_array_length = input_array.length;
-
-	for (let i = 0; i < input_array_length; i++) {
-		if (input_array[i] == "*") {
-			input_array[i] = ` <span class="operator">x</span> `;
-		} else if (input_array[i] == "/") {
-			input_array[i] = ` <span class="operator">÷</span> `;
-		} else if (input_array[i] == "+") {
-			input_array[i] = ` <span class="operator">+</span> `;
-		} else if (input_array[i] == "-") {
-			input_array[i] = ` <span class="operator">-</span> `;
-		}
-	}
-
-	return input_array.join("");
+function handleOperator(op){
+    operator = op;
+    previousValue = currentValue;
+    currentValue = '';
 }
 
-function CleanOutput (output) {
-	let output_string = output.toString();
-	let decimal = output_string.split(".")[1];
-	output_string = output_string.split(".")[0];
+function calculate(){
+    previousValue = Number(previousValue);
+    currentValue = Number(currentValue);
 
-	let output_array = output_string.split("");
+    if(operator === "+"){
+        previousValue += currentValue;
+    } else if(operator === "-"){
+        previousValue -= currentValue;
+    } else if(operator === "x"){
+        previousValue *= currentValue;
+    } else{
+        previousValue /= currentValue;
+    }
 
-	if (output_array.length > 3) {
-		for (let i = output_array.length - 3; i > 0; i -= 3) {
-			output_array.splice(i, 0, ",");
-		}
-	}
-
-	if (decimal) {
-		output_array.push(".");
-		output_array.push(decimal);
-	}
-
-	return output_array.join("");
+    previousValue = roundNumber(previousValue);
+    previousValue = previousValue.toString();
+    currentValue = previousValue.toString();
 }
 
-function ValidateInput (value) {
-	let last_input = input.slice(-1);
-	let operators = ["+", "-", "*", "/"];
-
-	if (value == "." && last_input == ".") {
-		return false;
-	}
-
-	if (operators.includes(value)) {
-		if (operators.includes(last_input)) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	return true;
+function roundNumber(num){
+    return Math.round(num * 1000) / 1000;
 }
+
+function addDecimal(){
+    if(!currentValue.includes(".")){
+        currentValue += '.';
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
